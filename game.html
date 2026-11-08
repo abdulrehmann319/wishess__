@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ur-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ibrahim ka Birthday Dhamaka 🎂</title>
+<style>
+:root{--bg:#10343a;--bg2:#0a2226;--gold:#ffc233;--pink:#ff4f8b;--ink:#fff6e0;--red:#ff5a36}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg2);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;overflow:hidden;touch-action:none}
+#wrap{position:fixed;inset:0;background:radial-gradient(circle at 50% 0,var(--bg),var(--bg2))}
+canvas{display:block;width:100%;height:100%}
+#hud{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) 14px 0;font-weight:700;font-size:18px;pointer-events:none;text-shadow:0 2px 0 #0007}
+#toast{position:absolute;top:22%;left:0;right:0;text-align:center;font-size:22px;font-weight:800;color:var(--gold);opacity:0;pointer-events:none;text-shadow:0 3px 0 #000a;padding:0 16px}
+#toast.on{animation:pop .9s ease-out}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}20%{opacity:1;transform:scale(1.1)}80%{opacity:1}100%{opacity:0;transform:translateY(-20px)}}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:14px;background:#0a2226e6}
+.screen.hide{display:none}
+h1{font-size:clamp(30px,8vw,52px);margin:0;line-height:1.05;color:var(--gold);text-shadow:4px 4px 0 var(--pink)}
+p{margin:0;max-width:420px;font-size:17px;line-height:1.5}
+.big{font-size:64px}
+button{font:inherit;font-weight:800;font-size:20px;padding:14px 30px;border:0;border-radius:14px;background:var(--gold);color:#3a1d00;box-shadow:0 6px 0 #b8801a;cursor:pointer}
+button:active{transform:translateY(4px);box-shadow:0 2px 0 #b8801a}
+button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+.badge{background:var(--pink);color:#fff;font-weight:800;padding:6px 14px;border-radius:999px;transform:rotate(-3deg);font-size:16px;box-shadow:3px 3px 0 #000a}
+.sub{color:var(--gold);font-weight:700;font-size:16px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:15px;opacity:.9}
+.card{background:var(--ink);color:#3a1d00;border-radius:18px;padding:18px 20px;max-width:440px;font-size:18px;line-height:1.55;box-shadow:8px 8px 0 var(--pink);text-align:left}
+@media (prefers-reduced-motion:reduce){#toast.on{animation:none;opacity:1}}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="c"></canvas>
+  <div id="hud"><span id="sc">Score: 0</span><span id="lv">❤️❤️❤️</span></div>
+  <div id="toast"></div>
+
+  <div class="screen" id="start">
+    <div class="big">🎂</div>
+    <div class="badge" id="badge">🏆 Kek-Khor No. 1</div>
+    <h1>Ibrahim Bhai<br>Ka Birthday<br>Dhamaka!</h1>
+    <p class="sub" id="sub">Mamu ki taraf se, sirf aur sirf Ibrahim ke liye. Dusron ko haath lagana mana hai!</p>
+    <p>Kek, pizza aur gifts pakro. Mamu ki <b>chappal 🩴</b>, <b>mirchi 🌶️</b>, <b>badboodar jurab 🧦</b> aur <b>homework 📚</b> se bacho!</p>
+    <div class="legend"><span>🎂 +10</span><span>🍕 +5</span><span>🍫 +5</span><span>🎁 +15</span><span>🎈 +5</span><span>🩴🌶️🧦📚 = jaan gayi</span></div>
+    <p style="font-size:15px;opacity:.8">Ungli ya mouse se Ibrahim ko hilao. Mamu ne kaha: "Dhyan se khelna, warna chappal tayar hai!"</p>
+    <button id="go">Shuru Karo!</button>
+  </div>
+
+  <div class="screen hide" id="over">
+    <div class="big">😭</div>
+    <h1>Oho Ibrahim!</h1>
+    <p id="overmsg"></p>
+    <button id="again">Dobara Try Karo</button>
+  </div>
+
+  <div class="screen hide" id="win">
+    <div class="big">🥳</div>
+    <div class="badge">🏅 Official Kek-Khor Champion 2026</div>
+    <h1>Happy Birthday<br>Ibrahim! 💓</h1>
+    <div class="card">
+      Meri jaan Ibrahim, jeet gaye tum! 🏆 Mamu ki chappal bhi tumhe pakar nahi saki 😎<br><br>
+      Allah tumhe hamesha khush, healthy aur kamyab rakhe. Padhai bhi karna (homework wali kitab se mat daro 📚), aur mamu ko pizza treat dena mat bhoolna 🍕😜<br><br>
+      <b>– Tumhara Pyara Mamu ❤️</b>
+    </div>
+    <button id="again2">Phir Khelo 🎉</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+  var W,H,DPR;
+  function resize(){DPR=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
+  addEventListener('resize',resize);resize();
+
+  var $=function(i){return document.getElementById(i)};
+  var TYPES=[
+    {e:'🎂',p:10,w:3},{e:'🍕',p:5,w:4},{e:'🎁',p:15,w:2},{e:'🎈',p:5,w:3},
+    {e:'🍫',p:5,w:3},{e:'🩴',p:-1,w:3,bad:1},{e:'🌶️',p:-1,w:2,bad:1},{e:'🧦',p:-1,w:2,bad:1},{e:'📚',p:-1,w:2,bad:1}
+  ];
+  var pool=[];TYPES.forEach(function(t){for(var i=0;i<t.w;i++)pool.push(t)});
+  var GOOD={'🎂':['Kek ❤️ Mamu ka hissa bhi rakhna!','Meetha meetha! 😋','Birthday boy ne kek pakar liya!','Moms ko mat batana 🤫','Mombatti kahan hai? 🕯️'],
+            '🍕':['Pizza! Treat pakki! 🍕','Cheese hi cheese 🤤','Ek slice mamu ke liye bhi bachana!','Pizza: 1, Diet: 0 😎'],
+            '🍫':['Chocolate! Dant kharab, maza double 🍫','Mamu ko bhi do na! 😭'],
+            '🎁':['Gift! Mamu ne bheja hai 😎','Wah! Shandar!','Isme mamu ka bhi hissa hai, yaad rakhna 😏','Gift mein cash hoga shayad? 🤑'],
+            '🎈':['Gubbara pakra, hawa mein udd gaye 🎈','Pop! 🎉','Gubbara phatne se pehle selfie lo 🤳']};
+  var BAD={'🩴':['Mamu ki chappal lag gayi! 😂','Ouch! Mamu ka nishana pakka hai!','Chappal ne salaam kiya 🩴','Mamu ka nishana Olympics level 🎯','Ye mohabbat ki chappal thi 🥹'],
+           '🌶️':['Mirchi! Pani pani! 🥵','Zabaan jal gayi! 🔥','Mirchi ne bola: namaste 🌶️'],
+           '🧦':['Eww! Mamu ka jurab! 🤢','Badboo ka hamla! Naak band! 🤧','Dhoya kyun nahi mamu ne? 😂'],
+           '📚':['Homework aa gaya! 😱','Kitab ka bojh! Maths ka sawal? 😵','Kal test hai! 😬']};
+  var GOAL=150;
+  var st,items,parts,player,score,lives,last,spawnT,speed,run=false,toastT;
+
+  function pick(a){return a[Math.floor(Math.random()*a.length)]}
+  function say(t){var el=$('toast');el.textContent=t;el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
+  function hud(){$('sc').textContent='Score: '+score+' / '+GOAL;$('lv').textContent=lives>0?'❤️'.repeat(lives):'💔'}
+
+  function reset(){
+    items=[];parts=[];score=0;lives=3;spawnT=0;speed=140;
+    player={x:W/2,tx:W/2,w:70,face:'🧒',t:0};
+    hud();
+  }
+  function show(id){['start','over','win'].forEach(function(s){$(s).classList.add('hide')});if(id)$(id).classList.remove('hide')}
+  function begin(){reset();show(null);run=true;last=performance.now();requestAnimationFrame(loop)}
+
+  function burst(x,y,n,cols){for(var i=0;i<n;i++){var a=Math.random()*6.28,s=80+Math.random()*220;
+    parts.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-120,l:1,c:cols[i%cols.length],r:3+Math.random()*4})}}
+
+  function end(won){
+    run=false;
+    if(won){burst(W/2,H/3,120,['#ffc233','#ff4f8b','#5ad1ff','#9dff7a']);show('win');confetti()}
+    else{var rk=score<20?'Kek ka Kachua 🐢':score<50?'Samosa Student 🥟':score<90?'Pizza Pehelwan 🍕':'Almost Legend, bas thora sa aur! 😤';
+      $('overmsg').innerHTML='Score: <b>'+score+'</b><br>Tumhara rank: <b>'+rk+'</b><br>'+pick([
+      'Mamu ki chappal ne tumhe hara diya! 😂','Itni jaldi haar gaye? Mamu hansi rok nahi pa raha 🤣','Chappal, mirchi, jurab, sab jeet gaye. Badla lo! 💪','Mamu ne pehle hi kaha tha: dhyan se! 🩴']);show('over')}
+  }
+  var cfT;
+  function confetti(){ // keep confetti alive on win screen
+    cancelAnimationFrame(cfT);
+    (function f(now){
+      if(!$('win').classList.contains('hide')){
+        if(Math.random()<.5)burst(Math.random()*W,-10,6,['#ffc233','#ff4f8b','#5ad1ff','#9dff7a']);
+        draw(0.016);cfT=requestAnimationFrame(f)}
+    })();
+  }
+
+  function loop(now){
+    if(!run)return;
+    var dt=Math.min((now-last)/1000,.05);last=now;
+    update(dt);draw(dt);requestAnimationFrame(loop);
+  }
+
+  function update(dt){
+    speed=140+score*1.1;
+    player.x+=(player.tx-player.x)*Math.min(1,dt*14);
+    player.t+=dt;
+    spawnT-=dt;
+    if(spawnT<=0){
+      var t=pick(pool);
+      items.push({t:t,x:30+Math.random()*(W-60),y:-30,v:speed*(.8+Math.random()*.5),r:Math.random()*6,vr:(Math.random()-.5)*4});
+      spawnT=Math.max(.35,.9-score/300)+Math.random()*.3;
+    }
+    var py=H-90;
+    for(var i=items.length-1;i>=0;i--){
+      var it=items[i];it.y+=it.v*dt;it.r+=it.vr*dt;
+      if(Math.abs(it.x-player.x)<player.w*.6&&Math.abs(it.y-py)<46){
+        items.splice(i,1);
+        if(it.t.bad){lives--;burst(it.x,it.y,14,['#ff5a36','#ffc233']);say(pick(BAD[it.t.e]));player.shake=.3;
+          if(navigator.vibrate)navigator.vibrate(80);hud();if(lives<=0){end(false);return}}
+        else{score+=it.t.p;burst(it.x,it.y,12,['#ffc233','#ff4f8b','#fff']);
+          if(Math.random()<.4)say(pick(GOOD[it.t.e]));hud();if(score>=GOAL){end(true);return}}
+      }else if(it.y>H+40)items.splice(i,1);
+    }
+  }
+
+  function draw(dt){
+    ctx.clearRect(0,0,W,H);
+    // floor
+    ctx.fillStyle='#0a2226';ctx.fillRect(0,H-50,W,50);
+    ctx.fillStyle='#ffc23333';for(var x=0;x<W;x+=40)ctx.fillRect(x,H-50,20,4);
+    // bunting
+    for(var b=0;b<W;b+=46){ctx.fillStyle=['#ff4f8b','#ffc233','#5ad1ff','#9dff7a'][(b/46)%4|0];
+      ctx.beginPath();ctx.moveTo(b,48);ctx.lineTo(b+40,48);ctx.lineTo(b+20,84);ctx.fill()}
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    items.forEach(function(it){ctx.save();ctx.translate(it.x,it.y);ctx.rotate(it.r*.3);ctx.font='42px serif';ctx.fillText(it.t.e,0,0);ctx.restore()});
+    if(player){
+      var sh=player.shake>0?(Math.random()-.5)*10:0;if(player.shake>0)player.shake-=dt;
+      var bob=Math.sin(player.t*10)*2;
+      ctx.font='54px serif';ctx.fillText(player.face,player.x+sh,H-92+bob);
+      ctx.font='30px serif';ctx.fillText('🧺',player.x+sh,H-58);
+      ctx.font='bold 13px sans-serif';ctx.fillStyle='#ffc233';ctx.fillText('IBRAHIM',player.x,H-28);
+    }
+    for(var i=parts.length-1;i>=0;i--){var p=parts[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=500*dt;p.l-=dt*.9;
+      if(p.l<=0||p.y>H+20){parts.splice(i,1);continue}
+      ctx.globalAlpha=Math.max(0,p.l);ctx.fillStyle=p.c;ctx.fillRect(p.x,p.y,p.r,p.r*1.6)}
+    ctx.globalAlpha=1;
+  }
+
+  function setX(x){if(player)player.tx=Math.max(35,Math.min(W-35,x))}
+  cv.addEventListener('pointermove',function(e){setX(e.clientX)});
+  cv.addEventListener('pointerdown',function(e){setX(e.clientX)});
+  var keys={};
+  addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'||e.key==='a')setX((player?player.tx:0)-70);
+    if(e.key==='ArrowRight'||e.key==='d')setX((player?player.tx:0)+70);
+  });
+  $('go').onclick=begin;$('again').onclick=begin;$('again2').onclick=begin;
+  var BAD_T=['🏆 Kek-Khor No. 1','🍕 Pizza ka Shehenshah','🦁 Bhookha Sher','🩴 Chappal Survivor','😎 Mamu ka Laadla Bhanja','🎂 Mombatti Phook Master','🤓 Class ka Hero (Shayad)'];
+  var SUB_T=['Mamu ki taraf se, sirf aur sirf Ibrahim ke liye. Dusron ko haath lagana mana hai!','Warning: Is game ko khelne se bhook lag sakti hai 🍕','Mamu ne 5 minute mein banaya, 5 saal ki mohabbat se ❤️','Ibrahim: age +1, akal: loading... ⏳','Is game mein koi mamu ko nahi hara sakta, bas chappal se bachna hai!'];
+  var ti=0;setInterval(function(){ti++;$('badge').textContent=BAD_T[ti%BAD_T.length];$('sub').textContent=SUB_T[ti%SUB_T.length]},2500);
+  reset();draw(0);
+  addEventListener('resize',function(){if(!run&&player)draw(0)});
+})();
+</script>
+</body>
+</html>

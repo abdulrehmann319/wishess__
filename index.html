@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diwan-e-Ibrahim ✦ Mehfil-e-Mushaira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0e1020;--gold:#d8a94a;--ember:#ff9f43;--txt:#f1e6cf;--mute:#f1e6cfa8;--teal:#5fd0c4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--txt);font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:20px;
+ background:radial-gradient(ellipse at 50% 0,#1d2254,var(--night) 55%,#080912) fixed;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+main{position:relative;z-index:1}
+.ur{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Noto Naskh Arabic",serif;direction:rtl;font-style:normal;line-height:2.3}
+.en{font-family:"Great Vibes","Brush Script MT",cursive;font-style:normal}
+.rv{clip-path:inset(-40% -6% -40% 100%);filter:url(#ink)}
+.fd{opacity:0}
+/* flame + candles */
+.flame{position:absolute;left:50%;width:14px;height:28px;top:-30px;margin-left:-7px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;transform-origin:50% 90%;
+ background:radial-gradient(ellipse at 50% 70%,#fff6c8 0 18%,#ffb44a 45%,#ff7a1a 80%,transparent);box-shadow:0 0 22px 8px #ff9f4366;animation:fl .17s ease-in-out infinite alternate}
+@keyframes fl{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.9,1.12) rotate(3deg)}}
+.flame.out{animation:none;opacity:0;transition:opacity .3s}
+.cd{position:absolute;bottom:0;width:22px;height:96px;border-radius:3px;background:linear-gradient(90deg,#cdb98f,#fff3d6 45%,#cdb98f)}
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 20px 30px}
+.stage{position:relative;display:inline-block}
+.arch{width:min(62vw,280px);aspect-ratio:4/5;border-radius:999px 999px 10px 10px;padding:9px;border:2px solid var(--gold);
+ box-shadow:0 0 0 6px var(--night),0 0 0 8px #d8a94a77,0 0 70px #ff9f4333;opacity:0;transform:translateY(24px)}
+.arch img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 25%;border-radius:999px 999px 4px 4px}
+.stage .cd:nth-of-type(1){left:-46px}.stage .cd:nth-of-type(2){right:-46px}
+.h1{font-size:clamp(46px,14vw,84px);color:var(--gold);margin:22px 0 0;text-shadow:0 0 28px #d8a94a44}
+.h2{font-size:clamp(30px,8vw,44px);color:var(--ember);margin:0}
+.tag{font-size:21px;color:var(--mute);max-width:430px;margin:8px 0 0}
+.go{margin-top:26px;color:var(--teal);font-size:19px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+/* intro */
+.intro{max-width:560px;margin:0 auto;padding:30px 24px;text-align:center}
+.intro .ur{font-size:clamp(24px,6.5vw,32px);color:var(--gold);margin:6px 0 0}
+.orn{color:var(--gold);letter-spacing:.7em;margin:10px 0}
+/* sher */
+.sher{max-width:640px;margin:0 auto;padding:62px 24px;display:flex;flex-direction:column}
+.seal{align-self:center;display:flex;flex-direction:column;align-items:center;margin-bottom:6px;opacity:0;transition:opacity 1s}
+.seal.on{opacity:1}
+.seal b{width:70px;height:70px;border:1.5px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-size:20px;color:var(--gold);line-height:1;padding-top:8px;box-shadow:inset 0 0 0 4px var(--night),inset 0 0 0 5px #d8a94a77}
+.seal span{font-size:24px;color:var(--teal);margin-top:4px}
+.m{display:block;width:fit-content;max-width:100%;font-size:clamp(21px,5.8vw,30px);text-wrap:balance}
+.m1{align-self:flex-end}.m2{align-self:flex-start}
+.ro{margin:8px 0 0;font-size:19px;color:var(--mute);text-align:center}
+.mt{margin:12px 0 0;text-align:center;font-size:27px;color:var(--ember);line-height:1.35}
+.mt small{display:block;font-size:20px;color:var(--teal)}
+.mamu .m{color:#ffd9a8}
+/* finale */
+.fin{text-align:center;padding:70px 24px 120px;max-width:560px;margin:0 auto}
+.fin h2{font-size:42px;font-weight:400;color:var(--gold);margin:0 0 16px}
+.big{position:relative;display:inline-block;width:30px;height:140px;margin:46px auto 10px}
+.big .cd{position:absolute;inset:0;width:100%;height:100%}
+.big .flame{width:20px;height:40px;top:-42px;margin-left:-10px}
+.sm{position:absolute;left:50%;top:-34px;width:10px;height:10px;border-radius:50%;background:#cfd2e6;opacity:0}
+.sm.go2{animation:smk 2.4s ease-out forwards}
+@keyframes smk{from{opacity:.7;transform:translate(0,0) scale(.5)}to{opacity:0;transform:translate(var(--x),-120px) scale(4)}}
+button,a.b{font-family:"Great Vibes",cursive;font-style:normal;font-size:32px;padding:4px 30px 9px;border:2px solid var(--gold);background:transparent;color:var(--gold);border-radius:999px;cursor:pointer;text-decoration:none;display:inline-block;margin:6px}
+button:hover,button:focus-visible,a.b:hover{background:var(--gold);color:var(--night);outline:none}
+#wish{display:none}
+.wu{font-size:clamp(30px,8vw,46px);color:var(--gold)}
+#pc{position:fixed;right:9px;bottom:16px;width:9px;height:32vh;pointer-events:none;z-index:3}
+#pc .wax{position:absolute;bottom:0;left:0;right:0;border-radius:2px;background:linear-gradient(90deg,#cdb98f,#fff3d6,#cdb98f);opacity:.85}
+#pc .flame{width:9px;height:18px;top:-19px;margin-left:-4.5px;box-shadow:0 0 14px 5px #ff9f4366}
+@media (prefers-reduced-motion:reduce){.go{animation:none}.flame{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2"/></filter></svg>
+<canvas id="cv"></canvas>
+<div id="pc"><div class="wax" id="wax"><i class="flame"></i></div></div>
+
+<main>
+<section class="hero">
+  <div class="stage">
+    <div class="cd"><i class="flame"></i></div>
+    <div class="arch" id="arch"><img src="ibrahim.jpg" alt="Ibrahim"></div>
+    <div class="cd"><i class="flame"></i></div>
+  </div>
+  <h1 class="h1 ur rv" id="t1" style="margin-bottom:0">دیوانِ ابراہیم</h1>
+  <p class="h2 en fd" id="t2" style="margin:0">Happy Birthday, Ibrahim!</p>
+  <p class="tag fd" id="t3">Janab Ibrahim ‘Kek-Khor’ Sahab ka mukammal kalam, mamu ki taraf se ek chhota sa tohfa</p>
+  <div class="go fd" id="t4">neeche scroll karo, mehfil sajne wali hai ↓</div>
+</section>
+
+<section class="intro">
+  <div class="orn">✦ ✦ ✦</div>
+  <p>Aaj ki mehfil-e-mushaira mein tashreef la rahe hain:</p>
+  <p class="ur">غالبؔ ✦ اقبالؔ ✦ میرؔ ✦ فیضؔ ✦ جونؔ ✦ فرازؔ</p>
+  <p>sab ke sab Ibrahim ki salgirah par, aur mamu ka apna kalam bhi!</p>
+</section>
+
+<div id="shers"></div>
+
+<section class="fin">
+  <div class="orn">✦ ✦ ✦</div>
+  <h2 class="en">Ab ek chhota sa kaam…</h2>
+  <p>Shama jala di gayi hai. Ibrahim, ab dil mein ek dua maango aur phoonk maaro!</p>
+  <div class="big" id="bigc"><div class="cd"><i class="flame" id="bf"></i></div>
+    <span class="sm" style="--x:-30px"></span><span class="sm" style="--x:12px"></span><span class="sm" style="--x:34px"></span></div>
+  <div><button id="blow">Shama phoonko 🕯️</button></div>
+  <div id="wish">
+    <p class="wu ur rv" id="w1" style="margin:0">اللہ تمہیں ہمیشہ خوش رکھے</p>
+    <p class="en fd" id="w2" style="font-size:36px;color:var(--ember);margin:6px 0">Ab dil mein jo mangna tha, maang liya! 🤲</p>
+    <p class="ur fd" id="w3" style="font-size:26px;margin:0">آپ کا پیارا ماموں</p>
+    <p class="en fd" id="w4" style="font-size:44px;color:var(--gold);margin:0">Tumhara Mamu ❤️</p>
+    <div class="fd" id="w5"><a class="b" href="game.html">Mamu ka game 🎮</a><button onclick="scrollTo({top:0})">Phir se ↑</button></div>
+  </div>
+</section>
+</main>
+
+<script>
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var KF=[{clipPath:'inset(-40% -6% -40% 100%)'},{clipPath:'inset(-40% -6% -40% -6%)'}];
+function wr(el,ms,delay){return el.animate(KF,{duration:RM?1:ms,delay:RM?0:(delay||0),easing:'cubic-bezier(.45,.05,.4,1)',fill:'both'}).finished}
+function fd(el,ms,delay){return el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:RM?1:ms,delay:RM?0:(delay||0),fill:'both'}).finished}
+var $=function(i){return document.getElementById(i)};
+
+/* ---- hero sequence ---- */
+(async function(){
+  await fd($('arch'),1400,200);
+  await wr($('t1'),2200);
+  await fd($('t2'),1000);await fd($('t3'),900);await fd($('t4'),800);
+})();
+
+/* ---- poetry ---- */
+var D=[
+["غالبؔ","Mirza Ghalib","ہزاروں خواہشیں ایسی کہ ہر خواہش پہ دم نکلے","بہت نکلے مرے ارمان لیکن پھر بھی کم نکلے","Hazaron khwahishen aisi ke har khwahish pe dam nikle / Bohat nikle mere armaan lekin phir bhi kam nikle","Ibrahim, is saal ki saari khwahishen poori hon, aur kek ki to khaas tor par! 🎂"],
+["غالبؔ","Mirza Ghalib","ان کے دیکھے سے جو آ جاتی ہے منہ پر رونق","وہ سمجھتے ہیں کہ بیمار کا حال اچھا ہے","Unke dekhe se jo aa jati hai munh par raunaq / Woh samajhte hain ke beemar ka haal achha hai","Aaj jo bhi tumhe dekhe ga, kahe ga: birthday boy ke chehre par raunaq hi raunaq! ✨"],
+["اقبالؔ","Allama Iqbal","خودی کو کر بلند اتنا کہ ہر تقدیر سے پہلے","خدا بندے سے خود پوچھے بتا تیری رضا کیا ہے","Khudi ko kar buland itna ke har taqdeer se pehle / Khuda bande se khud pooche bata teri raza kya hai","Khud ko itna buland karo ke manzil khud tum se poochay: ab kahan jana hai?"],
+["اقبالؔ","Allama Iqbal","تو شاہیں ہے پرواز ہے کام تیرا","ترے سامنے آسماں اور بھی ہیں","Tu shaheen hai parwaz hai kaam tera / Tere samne aasman aur bhi hain","Ibrahim, tum shaheen ho. Aasman tumhara intezar kar raha hai! 🦅"],
+["اقبالؔ","Allama Iqbal","عقابی روح جب بیدار ہوتی ہے جوانوں میں","نظر آتی ہے ان کو اپنی منزل آسمانوں میں","Uqabi rooh jab bedar hoti hai jawanon mein / Nazar aati hai un ko apni manzil aasmanon mein","Jawani mein shaheen ki rooh jaag jaye to manzil seedha aasman mein nazar aati hai! 🦅"],
+["میرؔ","Mir Taqi Mir","ابتدائے عشق ہے روتا ہے کیا","آگے آگے دیکھیے ہوتا ہے کیا","Ibtida-e-ishq hai rota hai kya / Aage aage dekhiye hota hai kya","Abhi to zindagi shuru hui hai. Aage aage dekho kya kya hota hai! 🚀"],
+["جونؔ","Jaun Elia","بے دلی کیا یونہی دن گزر جائیں گے","صرف زندہ رہے ہم تو مر جائیں گے","Bedili kya yunhi din guzar jayenge / Sirf zinda rahe hum to mar jayenge","Sirf saansen lena zindagi nahi, Ibrahim. Zindagi ko bharpoor jeeo! 🔥"],
+["فیضؔ","Faiz Ahmed Faiz","گلوں میں رنگ بھرے بادِ نوبہار چلے","چلے بھی آؤ کہ گلشن کا کاروبار چلے","Gulon mein rang bhare baad-e-nau-bahar chale / Chale bhi aao ke gulshan ka karobar chale","Tumhari salgirah ke din mehfil mein bahar aa jati hai 🌸"],
+["اقبالؔ","Allama Iqbal","ستاروں سے آگے جہاں اور بھی ہیں","ابھی عشق کے امتحاں اور بھی ہیں","Sitaron se aage jahan aur bhi hain / Abhi ishq ke imtihan aur bhi hain","Yani Ibrahim, abhi imtihan aur bhi hain! Padhai mein dil lagana 😅📚"],
+["غالبؔ","Mirza Ghalib","عشق نے غالبؔ نکما کر دیا","ورنہ ہم بھی آدمی تھے کام کے","Ishq ne Ghalib nikamma kar diya / Warna hum bhi aadmi the kaam ke","Mobile ne Ibrahim ko nikamma kar diya, warna ye bhi bohat kaam ka banda tha! 📱😜"],
+["جونؔ","Jaun Elia","کیا تکلف کریں یہ کہنے میں","جو بھی خوش ہے ہم اس سے جلتے ہیں","Kya takalluf karen ye kehne mein / Jo bhi khush hai hum us se jalte hain","Aaj Ibrahim itna khush hai ke mamu thora sa jal raha hai 😂 (kek phir bhi chahiye!)"],
+["اقبالؔ","Allama Iqbal","نہیں ہے نا امید اقبالؔ اپنی کشتِ ویراں سے","ذرا نم ہو تو یہ مٹی بہت زرخیز ہے ساقی","Nahin hai na-umeed Iqbal apni kisht-e-veeran se / Zara nam ho to ye mitti bohat zarkhez hai saqi","Thori mehnat ka paani dalo to Ibrahim ki mitti bohat zarkhez hai 🌱"],
+["جونؔ","Jaun Elia","اپنا رشتہ زمیں سے ہی رکھو","کچھ نہیں آسماں میں رکھا ہے","Apna rishta zameen se hi rakho / Kuch nahi aasman mein rakha hai","Iqbal kehte hain aasman, Jaun kehte hain zameen. Ibrahim, dono ka balance rakhna! ⚖️"],
+["غالبؔ","Mirza Ghalib","ہیں اور بھی دنیا میں سخن ور بہت اچھے","کہتے ہیں کہ غالبؔ کا ہے اندازِ بیاں اور","Hain aur bhi dunya mein sukhanwar bohat achhe / Kehte hain ke Ghalib ka hai andaz-e-bayan aur","Dunya mein bohat log hain, magar Ibrahim ka andaz sab se alag hai 😎"],
+["فرازؔ","Ahmad Faraz","شِکوۂ ظلمتِ شب سے تو کہیں بہتر تھا","اپنے حصے کی کوئی شمع جلاتے جاتے","Shikwa-e-zulmat-e-shab se to kahin behtar tha / Apne hisse ki koi shama jalate jate","Ye sher Ibrahim ne khud apne haath se likha tha. Tum bhi apne hisse ki shama jalate rehna ❤️"],
+["ماموںؔ","Mamu ka apna kalam","ابراہیم کی سالگرہ ہے، کیک کٹے گا، شور ہوگا","ماموں کا بھی حصہ ہوگا، ورنہ چپل کا دور ہوگا","Ibrahim ki salgirah hai, kek katay ga, shor hoga / Mamu ka bhi hissa hoga, warna chappal ka daur hoga","(Wazan ki zimmedari mamu par nahi 😂🩴)",1]
+];
+var host=$('shers');
+D.forEach(function(d){
+  var s=document.createElement('section');s.className='sher'+(d[6]?' mamu':'');
+  s.innerHTML='<div class="seal"><b class="ur"></b><span class="en"></span></div>'
+   +'<div class="m m1 ur rv"></div><div class="m m2 ur rv"></div>'
+   +'<p class="ro fd"></p><p class="mt en fd"><small>Mamu ka matlab:</small><span></span></p>';
+  s.querySelector('b').textContent=d[0];s.querySelector('.seal span').textContent=d[1];
+  s.querySelector('.m1').textContent=d[2];s.querySelector('.m2').textContent=d[3];
+  s.querySelector('.ro').textContent=d[4];s.querySelector('.mt span').textContent=d[5];
+  host.appendChild(s);
+});
+async function play(s){
+  s.querySelector('.seal').classList.add('on');
+  var r=s.querySelectorAll('.rv');
+  await wr(r[0],1900,300);await wr(r[1],1900,150);
+  var f=s.querySelectorAll('.fd');fd(f[0],900);await fd(f[1],900,500);
+}
+var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);play(e.target)}})},{threshold:.45}):null;
+document.querySelectorAll('.sher').forEach(function(s){io?io.observe(s):play(s)});
+
+/* ---- scroll candle ---- */
+function prog(){var h=document.documentElement.scrollHeight-innerHeight,p=h>0?scrollY/h:0;$('wax').style.height=Math.max(6,(1-p)*100)+'%'}
+addEventListener('scroll',prog,{passive:true});prog();
+
+/* ---- embers + burst ---- */
+var cv=$('cv'),cx=cv.getContext('2d'),W,H,E=[],B=[];
+function rs(){var r=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0)}
+addEventListener('resize',rs);rs();
+for(var i=0;i<(RM?0:38);i++)E.push({x:Math.random()*W,y:Math.random()*H,v:10+Math.random()*22,r:.8+Math.random()*2,p:Math.random()*6});
+function burst(x,y){for(var i=0;i<150;i++){var a=Math.random()*6.28,s=60+Math.random()*320;B.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-160,l:1,c:['#d8a94a','#ff9f43','#fff3d6','#5fd0c4'][i%4],r:1.5+Math.random()*3})}}
+var lt=performance.now();
+(function f(now){
+  var dt=Math.min((now-lt)/1000,.05);lt=now;cx.clearRect(0,0,W,H);
+  E.forEach(function(e){e.y-=e.v*dt;e.p+=dt*2;e.x+=Math.sin(e.p)*.3;if(e.y<-5){e.y=H+5;e.x=Math.random()*W}
+    cx.globalAlpha=.25+.35*Math.abs(Math.sin(e.p));cx.fillStyle='#ffb44a';cx.beginPath();cx.arc(e.x,e.y,e.r,0,6.3);cx.fill()});
+  for(var i=B.length-1;i>=0;i--){var b=B[i];b.x+=b.vx*dt;b.y+=b.vy*dt;b.vy+=380*dt;b.l-=dt*.55;
+    if(b.l<=0){B.splice(i,1);continue}cx.globalAlpha=b.l;cx.fillStyle=b.c;cx.beginPath();cx.arc(b.x,b.y,b.r,0,6.3);cx.fill()}
+  cx.globalAlpha=1;requestAnimationFrame(f)
+})(lt);
+
+/* ---- finale ---- */
+$('blow').onclick=async function(){
+  var btn=this;btn.style.display='none';$('bf').classList.add('out');
+  document.querySelectorAll('.sm').forEach(function(s,i){s.style.animationDelay=(i*.25)+'s';s.classList.add('go2')});
+  var r=$('bigc').getBoundingClientRect();
+  setTimeout(function(){burst(r.left+r.width/2,r.top);burst(W*.2,H*.5);burst(W*.8,H*.5)},700);
+  $('wish').style.display='block';
+  setTimeout(function(){$('wish').scrollIntoView({behavior:'smooth',block:'center'})},500);
+  await wr($('w1'),2000,900);
+  await fd($('w2'),900);await fd($('w3'),800);await fd($('w4'),800);await fd($('w5'),700);
+};
+</script>
+</body>
+</html>
